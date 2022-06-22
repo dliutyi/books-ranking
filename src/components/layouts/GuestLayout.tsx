@@ -1,17 +1,21 @@
 import { Button, Grid, Typography } from '@mui/material';
 import React, {PropsWithChildren, useState} from 'react';
 import BasicDialog from '../Dialogs/BasicDialog';
+import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 const GuestLayout : React.FC<PropsWithChildren> = ({children}) => {
     const signInFields = [
-        {id: "email", type: "email", label: "Email"}, 
-        {id: "password", type: "password", label: "Password"}];
+        {id: "email", type: "email", label: "Email", icon: PersonRoundedIcon }, 
+        {id: "password", type: "password", label: "Password", icon: KeyRoundedIcon}];
 
     const signUpFields = [
-        {id: "email", type: "email", label: "Email"}, 
-        {id: "fullname", type: "text", label: "Full name"}, 
-        {id: "nickname", type: "text", label: "Nickname"}, 
-        {id: "password", type: "password", label: "Password"}];
+        {id: "email", type: "email", label: "Email", icon: EmailRoundedIcon}, 
+        {id: "fullname", type: "text", label: "Full name", icon: PersonRoundedIcon}, 
+        {id: "nickname", type: "text", label: "Nickname", icon: EditRoundedIcon}, 
+        {id: "password", type: "password", label: "Password", icon: KeyRoundedIcon}];
 
     const [ isSignInOpen, setSignInOpen ] = useState(false);
     const [ isSignUpOpen, setSignUpOpen ] = useState(false);
@@ -28,8 +32,8 @@ const GuestLayout : React.FC<PropsWithChildren> = ({children}) => {
             <Grid item flexShrink={0} py={2}>
                 <Typography textAlign="center" variant='body2'>Books Ranking - © 2022</Typography>
             </Grid>
-            <BasicDialog caption="Sign In" isOpen={isSignInOpen} onClose={() => setSignInOpen(false)} onSubmit={() => {}} fields={signInFields} />
-            <BasicDialog caption="Sign Up" isOpen={isSignUpOpen} onClose={() => setSignUpOpen(false)} onSubmit={() => {}} fields={signUpFields} />
+            <BasicDialog caption="Login" action="Sign In" isOpen={isSignInOpen} onClose={() => setSignInOpen(false)} onSubmit={() => {}} fields={signInFields} />
+            <BasicDialog caption="Create Account" action="Sign Up" isOpen={isSignUpOpen} onClose={() => setSignUpOpen(false)} onSubmit={() => {}} fields={signUpFields} />
         </Grid>
 )}
 

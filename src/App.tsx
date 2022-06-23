@@ -2,6 +2,7 @@ import React from 'react';
 import { createTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from '@mui/material';
 import RouterLayout from './components/layouts/RouterLayout';
 import { BrowserRouter } from 'react-router-dom';
+import "./firebase/Initialization";
 
 let theme = createTheme({});
 theme = responsiveFontSizes(theme);

@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, InputAdornment, TextField } from '@mui/material';
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -16,10 +16,10 @@ const LoginDialog : React.FC<Props> = ({isOpen, onClose}) => {
     const onEmailChanged = (e: any) => setEmail(e.target.value);
     const onPasswordChanged = (e: any) => setPassword(e.target.value);
 
+    const auth = getAuth();
+
     const onSubmit = async () => {
-        const auth = getAuth();
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log(userCredential.user);
+        await signInWithEmailAndPassword(auth, email, password);
     }
 
     return (

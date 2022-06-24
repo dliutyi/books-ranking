@@ -1,5 +1,11 @@
 import { User } from "firebase/auth";
-import React, { PropsWithChildren, createContext, Dispatch, SetStateAction, useState } from "react";
+import React, {
+  PropsWithChildren,
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
 interface ModalProps {
   user?: User;

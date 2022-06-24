@@ -1,15 +1,20 @@
-import React from 'react';
-import { createTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from '@mui/material';
-import RouterLayout from './components/layouts/RouterLayout';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import {
+  createTheme,
+  CssBaseline,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material";
+import RouterLayout from "./components/layouts/RouterLayout";
+import { BrowserRouter } from "react-router-dom";
 import "./firebase/Initialization";
-import { UserProvider } from './components/contexts/UserContext';
-import { NotificationProvider } from './components/contexts/NotificationContext';
+import { UserProvider } from "./components/contexts/UserContext";
+import { NotificationProvider } from "./components/contexts/NotificationContext";
 
 let theme = createTheme({});
 theme = responsiveFontSizes(theme);
 
-const App : React.FC = () => {
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -22,6 +27,6 @@ const App : React.FC = () => {
       </NotificationProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

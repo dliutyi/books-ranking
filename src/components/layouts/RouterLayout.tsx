@@ -4,7 +4,7 @@ import WelcomePage from '../pages/Welcome';
 import GuestLayout from './GuestLayout';
 import { Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { UserContext } from '../Contexts/UserContext';
+import { UserContext } from '../contexts/UserContext';
 import AuthenticatedLayout from './AuthenticatedLayout';
 
 const RouterLayout : React.FC = () => {

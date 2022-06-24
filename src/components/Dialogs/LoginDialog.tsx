@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { NotificationContext } from '../contexts/NotificationContext';
 
 interface Props {
     isOpen: boolean,
@@ -17,9 +18,19 @@ const LoginDialog : React.FC<Props> = ({isOpen, onClose}) => {
     const onPasswordChanged = (e: any) => setPassword(e.target.value);
 
     const auth = getAuth();
+    const { setNotification } = useContext(NotificationContext);
 
     const onSubmit = async () => {
-        await signInWithEmailAndPassword(auth, email, password);
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (e: unknown) {
+            if(e instanceof Error){ 
+                setNotification({
+                    value: e.message,
+                    type: "error"
+                })
+            }
+        }
     }
 
     return (

@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from '@mui/material';
-import React, {PropsWithChildren, useState} from 'react';
-import LoginDialog from '../Dialogs/LoginDialog';
-import RegistrationDialog from '../Dialogs/RegistrationDialog';
+import React, {PropsWithChildren, useContext, useState} from 'react';
+import LoginDialog from '../dialogs/LoginDialog';
+import RegistrationDialog from '../dialogs/RegistrationDialog';
 
 const GuestLayout : React.FC<PropsWithChildren> = ({children}) => {
     const [ isSignInOpen, setSignInOpen ] = useState(false);

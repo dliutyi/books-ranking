@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 
 import WelcomePage from "../pages/Welcome";
 import GuestLayout from "./GuestLayout";
@@ -8,17 +8,21 @@ import { UserContext } from "../contexts/UserContext";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 
 const RouterLayout: React.FC = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
   const auth = getAuth();
 
-  useEffect(() => {
+  const onUserStateChanged = useCallback(() => {
     onAuthStateChanged(auth, (user) => {
       console.log("UserContext changed user state");
-      setUser(user == null ? undefined : user);
+      updateUser({ displayName: user?.displayName ?? "" });
     });
-  }, [auth, setUser]);
+  }, [auth, updateUser]);
 
-  if (user) {
+  useEffect(() => {
+    onUserStateChanged();
+  }, [onUserStateChanged]);
+
+  if (auth.currentUser) {
     return (
       <AuthenticatedLayout>
         <Routes>

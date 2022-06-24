@@ -8,12 +8,17 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import KeyRoundedIcon from "@mui/icons-material/KeyRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-// import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
+import { NotificationContext } from "../contexts/NotificationContext";
+import { UserContext } from "../contexts/UserContext";
 
 interface Props {
   isOpen: boolean;
@@ -22,17 +27,31 @@ interface Props {
 
 const RegistrationDialog: React.FC<Props> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
-  const [fullname, setFullname] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
 
   const onEmailChanged = (e: any) => setEmail(e.target.value);
-  const onFullnameChanged = (e: any) => setFullname(e.target.value);
   const onNicknameChanged = (e: any) => setNickname(e.target.value);
   const onPasswordChanged = (e: any) => setPassword(e.target.value);
 
+  const auth = getAuth();
+  const { updateUser } = useContext(UserContext);
+  const { setNotification } = useContext(NotificationContext);
+
   const onSubmit = async () => {
-    alert("To be implemented soon");
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser!, { displayName: nickname });
+      console.log(auth.currentUser);
+      updateUser({ displayName: nickname });
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setNotification({
+          value: e.message,
+          type: "error",
+        });
+      }
+    }
   };
 
   return (
@@ -65,25 +84,6 @@ const RegistrationDialog: React.FC<Props> = ({ isOpen, onClose }) => {
             <TextField
               required
               fullWidth
-              id="fullname"
-              type="text"
-              label="Full name"
-              variant="outlined"
-              value={fullname}
-              onChange={onFullnameChanged}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonRoundedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              required
-              fullWidth
               id="nickname"
               type="text"
               label="Nickname"
@@ -93,7 +93,7 @@ const RegistrationDialog: React.FC<Props> = ({ isOpen, onClose }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EditRoundedIcon />
+                    <PersonRoundedIcon />
                   </InputAdornment>
                 ),
               }}

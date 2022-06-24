@@ -1,5 +1,5 @@
 import { Button, Grid, Typography } from "@mui/material";
-import React, { PropsWithChildren, useContext, useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import LoginDialog from "../dialogs/LoginDialog";
 import RegistrationDialog from "../dialogs/RegistrationDialog";
 

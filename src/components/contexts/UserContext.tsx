@@ -1,24 +1,24 @@
-import { User } from "firebase/auth";
-import React, {
-  PropsWithChildren,
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from "react";
+import React, { createContext, PropsWithChildren, useState } from "react";
 
-interface ModalProps {
-  user?: User;
-  setUser: Dispatch<SetStateAction<User | undefined>>;
+export const UserContext = createContext<UserContextProps>(
+  {} as UserContextProps
+);
+
+interface UserContextProps {
+  updateUser: React.Dispatch<React.SetStateAction<UserProps>>;
 }
 
-export const UserContext = createContext<ModalProps>({} as ModalProps);
+interface UserProps {
+  displayName: string;
+}
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [, updateUser] = useState<UserProps>({
+    displayName: "",
+  });
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ updateUser }}>
       {children}
     </UserContext.Provider>
   );

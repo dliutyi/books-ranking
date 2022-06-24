@@ -17,14 +17,14 @@ theme = responsiveFontSizes(theme);
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <NotificationProvider>
-        <UserProvider>
-          <BrowserRouter>
+      <BrowserRouter>
+        <CssBaseline />
+        <NotificationProvider>
+          <UserProvider>
             <RouterLayout />
-          </BrowserRouter>
-        </UserProvider>
-      </NotificationProvider>
+          </UserProvider>
+        </NotificationProvider>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };

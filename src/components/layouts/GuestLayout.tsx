@@ -1,9 +1,10 @@
 import { Button, Grid, Typography } from "@mui/material";
-import React, { PropsWithChildren, useState } from "react";
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import LoginDialog from "../dialogs/LoginDialog";
 import RegistrationDialog from "../dialogs/RegistrationDialog";
 
-const GuestLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const GuestLayout: React.FC = () => {
   const [isSignInOpen, setSignInOpen] = useState(false);
   const [isSignUpOpen, setSignUpOpen] = useState(false);
 
@@ -22,7 +23,7 @@ const GuestLayout: React.FC<PropsWithChildren> = ({ children }) => {
             </Button>
           </Grid>
         </Grid>
-        {children}
+        <Outlet />
       </Grid>
       <Grid item flexShrink={0} py={2}>
         <Typography textAlign="center" variant="body2">

@@ -1,11 +1,12 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
-import WelcomePage from "../pages/Welcome";
+import WelcomePage from "../pages/WelcomePage";
 import GuestLayout from "./GuestLayout";
 import { Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { UserContext } from "../contexts/UserContext";
 import AuthenticatedLayout from "./AuthenticatedLayout";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const RouterLayout: React.FC = () => {
   const [isUserSynced, setUserSynced] = useState(false);
@@ -30,20 +31,22 @@ const RouterLayout: React.FC = () => {
 
   if (auth.currentUser) {
     return (
-      <AuthenticatedLayout>
-        <Routes>
+      <Routes>
+        <Route path="/" element={<AuthenticatedLayout />}>
           <Route path="/" element={<WelcomePage />} />
-        </Routes>
-      </AuthenticatedLayout>
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     );
   }
 
   return (
-    <GuestLayout>
-      <Routes>
+    <Routes>
+      <Route path="/" element={<GuestLayout />}>
         <Route path="/" element={<WelcomePage />} />
-      </Routes>
-    </GuestLayout>
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };
 

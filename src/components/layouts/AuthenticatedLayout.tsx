@@ -1,8 +1,9 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { getAuth, signOut } from "firebase/auth";
-import React, { PropsWithChildren } from "react";
+import React from "react";
+import { Outlet } from "react-router-dom";
 
-const AuthenticatedLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const AuthenticatedLayout: React.FC = () => {
   const auth = getAuth();
 
   const handleLogOut = async () => {
@@ -33,7 +34,7 @@ const AuthenticatedLayout: React.FC<PropsWithChildren> = ({ children }) => {
             </Button>
           </Grid>
         </Grid>
-        {children}
+        <Outlet />
       </Grid>
       <Grid item flexShrink={0} py={2}>
         <Typography textAlign="center" variant="body2">

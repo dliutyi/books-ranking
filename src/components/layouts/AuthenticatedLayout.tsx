@@ -2,6 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import { getAuth, signOut } from "firebase/auth";
 import React from "react";
 import { Outlet } from "react-router-dom";
+import HeaderLogo from "../../pictures/headerLogo.png";
 
 const AuthenticatedLayout: React.FC = () => {
   const auth = getAuth();
@@ -17,17 +18,18 @@ const AuthenticatedLayout: React.FC = () => {
           container
           px={5}
           py={2}
-          spacing={2}
           justifyContent="space-between"
+          alignContent="center"
+          alignItems="center"
         >
           <Grid item>
-            <Typography>
-              You are logged in as{" "}
-              <b>
-                {auth.currentUser?.displayName ?? auth.currentUser?.email ?? ""}
-              </b>
-            </Typography>
+            <img alt="BR | Books Ranking" height={40} src={HeaderLogo} />
           </Grid>
+          {/* <Grid item>
+            <Typography variant="h6">
+              {auth.currentUser?.displayName ?? auth.currentUser?.email ?? ""}
+            </Typography>
+          </Grid> */}
           <Grid item>
             <Button variant="outlined" onClick={handleLogOut}>
               Log out

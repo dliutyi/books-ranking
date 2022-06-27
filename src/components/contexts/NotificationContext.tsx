@@ -33,6 +33,7 @@ export const NotificationProvider: React.FC<PropsWithChildren> = ({
     <NotificationContext.Provider value={{ setNotification }}>
       {children}
       <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={notification ? true : false}
         autoHideDuration={4000}
         onClose={handleClose}

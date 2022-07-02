@@ -32,7 +32,12 @@ const AuthenticatedLayout: React.FC = () => {
   const auth = getAuth();
 
   const handleLogOut = async () => {
+    setUnfoldMenu(false);
     await signOut(auth);
+  };
+
+  const handleMenuClick = () => {
+    setUnfoldMenu(false);
   };
 
   const MenuItems = [
@@ -40,27 +45,27 @@ const AuthenticatedLayout: React.FC = () => {
       id: 1,
       title: "Home",
       href: "/",
-      action: null,
+      action: handleMenuClick,
       icon: HomeRoundedIcon,
     },
     {
       id: 2,
       title: "Books",
       href: "/books",
-      action: null,
+      action: handleMenuClick,
       icon: LibraryBooksRoundedIcon,
     },
     {
       id: 3,
       title: "Account",
       href: "/account",
-      action: null,
+      action: handleMenuClick,
       icon: SettingsApplicationsRoundedIcon,
     },
     {
       id: 4,
       title: "Log out",
-      href: null,
+      href: "/",
       action: handleLogOut,
       icon: LogoutRoundedIcon,
     },
@@ -132,21 +137,16 @@ const AuthenticatedLayout: React.FC = () => {
                 {MenuItems.slice(sliceFrom, MenuDividers[index + 1]).map(
                   (item) => (
                     <ListItem key={item.id} disablePadding>
-                      {item.href ? (
-                        <ListItemButton component={Link} to={item.href}>
-                          <ListItemIcon>
-                            <item.icon />
-                          </ListItemIcon>
-                          <ListItemWidthPadding primary={item.title} />
-                        </ListItemButton>
-                      ) : (
-                        <ListItemButton onClick={item.action!}>
-                          <ListItemIcon>
-                            <item.icon />
-                          </ListItemIcon>
-                          <ListItemWidthPadding primary={item.title} />
-                        </ListItemButton>
-                      )}
+                      <ListItemButton
+                        component={Link}
+                        to={item.href}
+                        onClick={item.action}
+                      >
+                        <ListItemIcon>
+                          <item.icon />
+                        </ListItemIcon>
+                        <ListItemWidthPadding primary={item.title} />
+                      </ListItemButton>
                     </ListItem>
                   )
                 )}

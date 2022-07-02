@@ -29,14 +29,14 @@ interface Props {
 }
 
 const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
   nickname: yup
     .string()
     .min(3, "Nickname should be of minimum 3 characters")
     .required("Nickname is required"),
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
   password: yup
     .string()
     .min(6, "Password should be of minimum 6 characters")
@@ -50,8 +50,8 @@ const RegistrationDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
       nickname: "",
+      email: "",
       password: "",
     },
     validationSchema: validationSchema,
@@ -97,26 +97,6 @@ const RegistrationDialog: React.FC<Props> = ({ isOpen, onClose }) => {
               <TextField
                 required
                 fullWidth
-                id="email"
-                type="email"
-                label="Email"
-                variant="outlined"
-                {...formik.getFieldProps("email")}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmailRoundedIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                required
-                fullWidth
                 id="nickname"
                 type="text"
                 label="Nickname"
@@ -130,6 +110,26 @@ const RegistrationDialog: React.FC<Props> = ({ isOpen, onClose }) => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <PersonRoundedIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                required
+                fullWidth
+                id="email"
+                type="email"
+                label="Email"
+                variant="outlined"
+                {...formik.getFieldProps("email")}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EmailRoundedIcon />
                     </InputAdornment>
                   ),
                 }}

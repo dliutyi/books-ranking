@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { UserContext } from "../contexts/UserContext";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import NotFoundPage from "../pages/NotFoundPage";
+import AccountPage from "../pages/AccountPage";
 
 const RouterLayout: React.FC = () => {
   const [isUserSynced, setUserSynced] = useState(false);
@@ -34,6 +35,7 @@ const RouterLayout: React.FC = () => {
       <Routes>
         <Route path="/" element={<AuthenticatedLayout />}>
           <Route path="/" element={<WelcomePage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

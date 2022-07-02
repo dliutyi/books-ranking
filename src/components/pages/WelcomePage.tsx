@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { getAuth } from "firebase/auth";
+import { grey } from "@mui/material/colors";
 
 interface Book {
   title: string;
@@ -39,10 +40,10 @@ const bookConverter = {
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.overline,
-  color: theme.palette.text.secondary,
+  color: grey[800],
   marginBottom: "15px",
   padding: "15px",
-  fontWeight: "bolder",
+  fontWeight: "bold",
 }));
 
 const WelcomePage: React.FC = () => {
@@ -104,7 +105,7 @@ const WelcomePage: React.FC = () => {
         container
         alignItems="center"
         justifyContent="center"
-        height="50vh"
+        height="35vh"
         xs={12}
       >
         <Grid item container xs={11} spacing={3} flexDirection="column">
